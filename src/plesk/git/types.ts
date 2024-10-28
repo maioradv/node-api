@@ -1,3 +1,4 @@
+import { XmlResult } from "../core/types/xml"
 
 export type GitPullDto = {
   domain:string,
@@ -7,13 +8,12 @@ export type GitPullDto = {
 export type GitPullResponse = {
   extension:{
     call:{
-      result:{
-        status:string,
+      result:XmlResult<{
         git:{
           fetch:string,
           deploy:string
         }
-      }
+      }>
     }
   }
 }

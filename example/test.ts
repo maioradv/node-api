@@ -9,7 +9,11 @@ async function example() {
   api.git.pull({
     domain:'domain',
     repo:'repo.git'
-  }).then(v => console.log(JSON.stringify(v)))
+  }).then(v => {
+    if(v.packet.extension.call.result.status == 'ok') {
+      
+    }
+  })
 }
 
 example()
