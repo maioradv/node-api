@@ -1,6 +1,6 @@
 import { ResolverXML } from "../core/types/resolver";
 
-export const GitResolver:ResolverXML<['pull']> = {
+export const GitResolver:ResolverXML<['pull','create']> = {
   pull:{
     name:'pull',
     query:{
@@ -15,6 +15,26 @@ export const GitResolver:ResolverXML<['pull']> = {
               deploy:{
                 domain:'{domain}',
                 name:'{repo}'
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  create:{
+    name:'create',
+    query:{
+      packet:{
+        extension:{
+          call:{
+            git:{
+              create:{
+                domain:'{domain}',
+                name:'{repo}',
+                "remote-url":'{remoteUrl}',
+                "deployment-path":'httpdocs',
+                "depolyment-mode":'auto'
               }
             }
           }

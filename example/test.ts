@@ -1,11 +1,11 @@
-import { ftpCredentialsGenerator, pleskApiClient } from '../src'
+import { dbCredentialsGenerator, ftpCredentialsGenerator, pleskApiClient } from '../src'
 import credentials from './credentials.json'
 
 async function example() {
   const api = pleskApiClient(credentials)
 
   const name = 'api.testing.tidelizio.menu'
-  const res = await api.webspace.add({
+  /*const res = await api.webspace.add({
     domain:name,
     ip:'54.37.38.220',
     ...ftpCredentialsGenerator(name)
@@ -22,7 +22,26 @@ async function example() {
   await api.ssh.connect()
   await api.ssh.cleanWebspace(name)
   api.ssh.disconnect()
-  //return
+  //return*/
+
+  /*const res = await api.git.create({
+    domain:name,
+    repo:'cms-basic-api.git',
+    remoteUrl:`${credentials.git.url}/cms-basic-api.git`
+  })*/
+  /*const res = await api.git.pull({
+    domain:name,
+    repo:'cms-basic-api.git',
+  })*/
+
+  const db = dbCredentialsGenerator(name)
+  const res = await api.database.createUser({
+    dbId:'6',
+    login:db.login,
+    password:db.password
+  })
+
+  console.log(JSON.stringify(res.packet))
 }
 
 example()

@@ -8,6 +8,7 @@ import { Raw } from "./raw";
 import { PleskSSh } from "./core/ssh";
 import { SSHClient } from "../ssh";
 import { Webspace } from "./webspace";
+import { Database } from "./database";
 
 export class PleskApiClient implements ClientApiI
 {
@@ -15,6 +16,7 @@ export class PleskApiClient implements ClientApiI
   protected config:ValidatedApiConfigs;
   protected sshClient:SSHClient;
   webspace:Webspace;
+  database:Database;
   git:Git;
   raw:Raw;
   extensions:PleskExtension;
@@ -45,6 +47,7 @@ export class PleskApiClient implements ClientApiI
 
   protected _initModules() {
     this.webspace = new Webspace(this.client)
+    this.database = new Database(this.client)
     this.git = new Git(this.client)
     this.raw = new Raw(this.client)
     this.ssh = new PleskSSh(this.sshClient)
