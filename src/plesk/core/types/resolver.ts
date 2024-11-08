@@ -1,6 +1,6 @@
-export type ResolverDef<T extends string> = {
+export type ResolverDef<T extends string,J = string> = {
   name:T,
-  query:string,
+  query:J,
 }
 export type Resolvers<Queries extends ReadonlyArray<string>,Mutations extends ReadonlyArray<string>> = {
   query:{
@@ -11,6 +11,6 @@ export type Resolvers<Queries extends ReadonlyArray<string>,Mutations extends Re
   }
 }
 
-export type Resolver<Queries extends ReadonlyArray<string>> = {
-  [K in (Queries extends ReadonlyArray<infer U> ? U : never)]:ResolverDef<K>
+export type ResolverXML<Queries extends ReadonlyArray<string>> = {
+  [K in (Queries extends ReadonlyArray<infer U> ? U : never)]:ResolverDef<K,Record<string,any>>
 }

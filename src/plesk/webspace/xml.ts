@@ -1,0 +1,48 @@
+import { ResolverXML } from "../core/types/resolver";
+
+export const WebspaceResolver:ResolverXML<['add']> = {
+  add:{
+    name:'add',
+    query:{
+      packet:{
+        webspace:{
+          add:{
+            gen_setup:{
+              name:'{domain}',
+              htype:'vrt_hst',
+              ip_address:'{ip}'
+            },
+            hosting:{
+              vrt_hst:{
+                property:[
+                  {
+                    name:'seo-redirect',
+                    value:'non-www'
+                  },
+                  {
+                    name:'ftp_login',
+                    value:'{ftpLogin}'
+                  },
+                  {
+                    name:'ftp_password',
+                    value:'{ftpPassword}'
+                  },
+                  {
+                    name:'shell',
+                    value:'/bin/bash'
+                  },
+                  {
+                    name:'cgi_mode',
+                    value:'www-root'
+                  },
+                ],
+                ip_address:'{ip}'
+              }
+            },
+            'plan-name':'unlimited'
+          }
+        }
+      }
+    }
+  }
+}

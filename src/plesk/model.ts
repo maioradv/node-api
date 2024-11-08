@@ -27,7 +27,7 @@ export class ApiModule {
     }
   }
 
-  protected async _xml<Res,Req = Record<string,any>>(resolver:ResolverDef<string>,variables?:Req): Promise<XmlResponse<Res>> {
+  protected async _xml<Res,Req = Record<string,any>>(resolver:ResolverDef<string,Record<string,any>>,variables?:Req): Promise<XmlResponse<Res>> {
     try {
       const response = await this.client.request({
         method:'post',

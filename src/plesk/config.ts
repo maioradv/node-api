@@ -7,6 +7,10 @@ export type ApiConfigs = {
     user:string,
     password:string
   },
+  ssh?:{
+    user:string,
+    password:string
+  },
   axios?:(axios:AxiosStatic) => AxiosStatic
 }
 
