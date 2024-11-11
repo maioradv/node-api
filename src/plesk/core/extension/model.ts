@@ -13,4 +13,15 @@ export class ExtesionModule {
       }
     })
   }
+
+  protected async _form(path:string,args:Record<string,string> = {}){
+    return this.client.fetch(`${this.client.baseUrl}${path}`,{
+      method:'POST',
+      body: new URLSearchParams(args),
+      headers:{
+        "X-Forgery-Protection-Token":this.client.token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+  }
 }

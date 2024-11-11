@@ -10,6 +10,7 @@ export * from './git/types'
 export * from './webspace/types'
 export * from './database/types'
 export * from './core/utils/generator'
+export * from './core/utils/replace'
 
 export function pleskApiClient(opt:PleskApiConfigs): PleskApiClient {
   return new PleskApiClient(opt)

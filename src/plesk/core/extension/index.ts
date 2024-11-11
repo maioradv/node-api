@@ -1,6 +1,7 @@
 import fetchCookie, { FetchCookieImpl } from "fetch-cookie";
 import { CookieJar } from "tough-cookie";
 import { NodeExt } from "./module/node-ext";
+import { SslExt } from "./module/ssl";
 
 export type PleskExtensionConfig = {
   host:string,
@@ -21,6 +22,7 @@ export class PleskExtension {
   private jar:CookieJar; 
   private client:PleskExtensionClient;
   nodejs:NodeExt;
+  ssl:SslExt;
 
   constructor(config:PleskExtensionConfig){
     this.jar = new CookieJar();
@@ -35,6 +37,7 @@ export class PleskExtension {
 
   private initModules() {
     this.nodejs = new NodeExt(this.client)
+    this.ssl = new SslExt(this.client)
   }
 
   async login() {

@@ -34,12 +34,14 @@ export class SSHClient {
 
   async executeCommand(command: string, timeout: number = 5000): Promise<SSHExecCommandResponse> {
     try {
+      let timeoutId:NodeJS.Timeout;
       const result = await Promise.race([
         this.ssh.execCommand(command),
         new Promise<SSHExecCommandResponse>((_, reject) =>
-          setTimeout(() => reject(new Error(`Timeout`)), timeout)
+          timeoutId = setTimeout(() => reject(new Error(`Timeout`)), timeout)
         )
       ]);
+      if(timeoutId) clearTimeout(timeoutId)
       if ('stderr' in result && result.stderr) {
         throw new Error(result.stderr)
       }

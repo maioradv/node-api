@@ -1,13 +1,13 @@
 import { XmlResult } from "../core/types/xml"
 
 export type DatabaseCreateDto = {
-  webspaceId:string,
+  webspaceId:string|number,
   name:string,
   type:'mysql'|'postgresql'
 }
 
 export type DatabaseCreateUserDto = {
-  dbId:string,
+  dbId:string|number,
   login:string,
   password:string
 }
