@@ -11,9 +11,10 @@ export class PGClient {
     await this.client.connect()
   }
 
-  async query<T extends Record<string,any>>(queryText: string, params: any[] = []) {
+  async query<T extends Record<string,any>>(queryText: string, params: any[] = []): Promise<T[]> {
     try {
-      return this.client.query<T>(queryText, params)
+      const res = await this.client.query<T>(queryText, params)
+      return res.rows
     } catch (error) {
       throw error;
     }
