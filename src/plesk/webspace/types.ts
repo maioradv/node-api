@@ -17,3 +17,37 @@ export type WebspaceAddResponse = {
     }
   }
 }
+
+export type WebspaceDelDto = {
+  id:number|string
+}
+
+export type WebspaceDelResponse = {
+  webspace:{
+    del:{
+      result:XmlResult<{
+        id:string,
+      }>
+    }
+  }
+}
+
+export enum WebspaceStatus {
+  active = '0',
+  disabled = '16'
+}
+
+export type WebspaceEnableDto = {
+  id:string|number,
+  status:WebspaceStatus
+}
+
+export type WebspaceEnableResponse = {
+  webspace:{
+    set:{
+      result:XmlResult<{
+        id:string,
+      }>
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { ResolverXML } from "../core/types/resolver";
 
-export const WebspaceResolver:ResolverXML<['add']> = {
+export const WebspaceResolver:ResolverXML<['add','del','enable']> = {
   add:{
     name:'add',
     query:{
@@ -40,6 +40,39 @@ export const WebspaceResolver:ResolverXML<['add']> = {
               }
             },
             'plan-name':'unlimited'
+          }
+        }
+      }
+    }
+  },
+  del:{
+    name:'del',
+    query:{
+      packet:{
+        webspace:{
+          del:{
+            filter:{
+              id:'{id}'
+            }
+          }
+        }
+      }
+    }
+  },
+  enable:{
+    name:'enable',
+    query:{
+      packet:{
+        webspace:{
+          set:{
+            filter:{
+              id:'{id}'
+            },
+            values:{
+              gen_setup:{
+                status:'{status}'
+              }
+            }
           }
         }
       }
