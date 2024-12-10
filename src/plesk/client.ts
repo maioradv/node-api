@@ -29,7 +29,8 @@ export class PleskApiClient implements ClientApiI
   }
 
   protected _initClient(): Axios {
-    axios.defaults.baseURL = `https://${this.config.host}:8443`;
+    const client = axios.create()
+    client.defaults.baseURL = `https://${this.config.host}:8443`;
     this.extensions = new PleskExtension({
       host:this.config.host,
       credentials:this.config.credentials
@@ -39,10 +40,10 @@ export class PleskApiClient implements ClientApiI
       credentials:this.config.ssh
     })
     if(this.config.credentials){
-      axios.defaults.headers[ApiHeader.User] = this.config.credentials.user
-      axios.defaults.headers[ApiHeader.Password] = this.config.credentials.password
+      client.defaults.headers[ApiHeader.User] = this.config.credentials.user
+      client.defaults.headers[ApiHeader.Password] = this.config.credentials.password
     }
-    return this.config.axios ? this.config.axios(axios) : axios
+    return this.config.axios ? this.config.axios(client) : client
   }
 
   protected _initModules() {

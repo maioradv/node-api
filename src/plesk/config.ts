@@ -1,4 +1,4 @@
-import { AxiosStatic } from "axios"
+import { AxiosInstance } from "axios"
 import { ConfigError } from "./error"
 
 export type ApiConfigs = {
@@ -11,7 +11,7 @@ export type ApiConfigs = {
     user:string,
     password:string
   },
-  axios?:(axios:AxiosStatic) => AxiosStatic
+  axios?:(axios:AxiosInstance) => AxiosInstance
 }
 
 export type ValidatedApiConfigs = ApiConfigs //& WithRequired<ApiConfigs,'version'|'sandbox'>
