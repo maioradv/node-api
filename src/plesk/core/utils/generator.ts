@@ -1,6 +1,6 @@
 
 export function ftpCredentialsGenerator(domain:string) {
-  const ftpLogin = domain.replace(/\./g,'')
+  const ftpLogin = domain.replace(/\./g,'').substring(0,32)
   const ftpPassword = randomPassword()
   return {
     ftpLogin,
@@ -9,7 +9,7 @@ export function ftpCredentialsGenerator(domain:string) {
 }
 
 export function dbCredentialsGenerator(domain:string) {
-  const name = domain.replace(/\./g,'')
+  const name = domain.replace(/\./g,'').substring(0,30)
   const login = `${name}_u`
   const password = randomPassword()
   return {
