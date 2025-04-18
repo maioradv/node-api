@@ -35,6 +35,10 @@ export const WebspaceResolver:ResolverXML<['add','del','enable']> = {
                     name:'cgi_mode',
                     value:'www-root'
                   },
+                  {
+                    name:'php',
+                    value:'false'
+                  }
                 ],
                 ip_address:'{ip}'
               }

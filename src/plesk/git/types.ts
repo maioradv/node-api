@@ -2,13 +2,12 @@ import { XmlResult } from "../core/types/xml"
 
 export type GitPullDto = {
   domain:string,
-  repo:string
 }
 
 export type GitCreateDto = {
   domain:string,
-  repo:string,
-  remoteUrl:string
+  remoteUrl:string,
+  path:string
 }
 
 export type GitPullResponse = {

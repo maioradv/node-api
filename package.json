@@ -1,6 +1,6 @@
 {
   "name": "@maioradv/node-api",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "JS lib for Maior Api Integrations",
   "repository": "https://github.com/maioradv/node-api.git",
   "author": "Maior ADV Srl",

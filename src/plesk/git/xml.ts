@@ -10,11 +10,11 @@ export const GitResolver:ResolverXML<['pull','create']> = {
             git:{
               fetch:{
                 domain:'{domain}',
-                name:'{repo}'
+                name:'{domain}'
               },
               deploy:{
                 domain:'{domain}',
-                name:'{repo}'
+                name:'{domain}'
               }
             }
           }
@@ -31,10 +31,10 @@ export const GitResolver:ResolverXML<['pull','create']> = {
             git:{
               create:{
                 domain:'{domain}',
-                name:'{repo}',
+                name:'{domain}',
                 "remote-url":'{remoteUrl}',
-                "deployment-path":'httpdocs',
-                "depolyment-mode":'auto'
+                "deployment-path":'{path}',
+                "deployment-mode":'auto'
               }
             }
           }

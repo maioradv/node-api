@@ -1,0 +1,45 @@
+import { ResolverXML } from "../core/types/resolver";
+
+export const SubdomainResolver:ResolverXML<['add','del']> = {
+  add:{
+    name:'add',
+    query:{
+      packet:{
+        subdomain:{
+          add:{
+            parent:'{parent}',
+            name:'{name}',
+            property:[
+              {
+                name:'www_root',
+                value:'{name}.{parent}'
+              },
+              {
+                name:'php',
+                value:'false'
+              },
+              {
+                name:'fastcgi',
+                value:'false'
+              }
+            ],
+          }
+        }
+      }
+    }
+  },
+  del:{
+    name:'del',
+    query:{
+      packet:{
+        subdomain:{
+          del:{
+            filter:{
+              id:'{id}'
+            }
+          }
+        }
+      }
+    }
+  },
+}
