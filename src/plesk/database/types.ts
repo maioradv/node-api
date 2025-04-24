@@ -6,6 +6,10 @@ export type DatabaseCreateDto = {
   type:'mysql'|'postgresql'
 }
 
+export type DatabaseRemoveDto = {
+  dbId:string|number
+}
+
 export type DatabaseCreateUserDto = {
   dbId:string|number,
   login:string,
@@ -15,6 +19,16 @@ export type DatabaseCreateUserDto = {
 export type DatabaseCreateResponse = {
   database:{
     "add-db":{
+      result:XmlResult<{
+        id:string
+      }>
+    }
+  }
+}
+
+export type DatabaseRemoveResponse = {
+  database:{
+    "del-db":{
       result:XmlResult<{
         id:string
       }>

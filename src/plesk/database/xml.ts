@@ -1,6 +1,6 @@
 import { ResolverXML } from "../core/types/resolver";
 
-export const DatabaseResolver:ResolverXML<['createUser','create']> = {
+export const DatabaseResolver:ResolverXML<['createUser','create','remove']> = {
   createUser:{
     name:'createUser',
     query:{
@@ -28,5 +28,19 @@ export const DatabaseResolver:ResolverXML<['createUser','create']> = {
         }
       }
     }
-  }
+  },
+  remove:{
+    name:'remove',
+    query:{
+      packet:{
+        database:{
+          "del-db":{
+            filter:{
+              "db-id":"{dbId}"
+            }
+          }
+        }
+      }
+    }
+  },
 }
