@@ -36,7 +36,7 @@ export const DatabaseResolver:ResolverXML<['createUser','create','remove']> = {
         database:{
           "del-db":{
             filter:{
-              "db-id":"{dbId}"
+              id:"{dbId}"
             }
           }
         }
