@@ -17,6 +17,15 @@ export class PleskSSh {
     return this.client.executeCommand(command)
   }
 
+  runScript(user:string,commands:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
+    const login = `su - ${user} -s /bin/bash`
+    const move = `cd ${path}`
+    const install = `((${commands}) &> script.log)`
+    const reboot = `mkdir -p tmp && touch tmp/restart.txt`
+    const command = `${login} -c "${move} && ${install} && ${reboot}"`
+    return this.client.executeCommand(command,timeout)
+  }
+
   yarnBuild(user:string,commands:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
     const login = `su - ${user} -s /bin/bash`
     const move = `cd ${path}`
