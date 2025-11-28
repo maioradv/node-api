@@ -17,10 +17,10 @@ export class NodeExt extends ExtesionModule {
     return res.ok
   }
 
-  async changeVersion(domainId:number,handlerId:"/opt/plesk/node/22/bin/node"|"/opt/plesk/node/20/bin/node") {
+  async changeVersion(domainId:number,version:string|number) {
     const res = await this._post('/modules/nodejs/index.php/api/change-version',{
       domainId,
-      handlerId,
+      handlerId:`/opt/plesk/node/${version}/bin/node` // /opt/plesk/node/22/bin/node
     })
     return res.ok
   }
