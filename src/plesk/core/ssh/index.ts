@@ -38,7 +38,7 @@ export class PleskSSh {
   prismaMigration(user:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
     const login = `su - ${user} -s /bin/bash`
     const move = `cd ${path}`
-    const migrate = `((yarn db:generate && yarn db:migrate:deploy) &> db-migration.log)`
+    const migrate = `((yarn install && yarn db:generate && yarn db:migrate:deploy) &> db-migration.log)`
     const reboot = `mkdir -p tmp && touch tmp/restart.txt`
     const command = `${login} -c "${move} && ${migrate} && ${reboot}"`
     return this.client.executeCommand(command,timeout)
