@@ -4,6 +4,7 @@
     "target": "es2019",
     "declaration": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": false,
     "removeComments": false,
     "resolveJsonModule": true,
