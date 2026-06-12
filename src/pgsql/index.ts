@@ -1,4 +1,5 @@
 import { Client, ClientConfig } from 'pg';
+export * from './backup'
 
 export class PGClient {
   private client: Client;
