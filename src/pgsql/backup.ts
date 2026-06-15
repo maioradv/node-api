@@ -51,6 +51,7 @@ export class PGBackupManager {
       `-d ${config.database}`,
       '--no-owner',
       '--no-acl',
+      '--no-comments',
       '-v',              
       dumpPath,
     ].join(' ');
