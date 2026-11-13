@@ -37,7 +37,7 @@ export class PleskSSh {
     user:string,
     commands:string,
     path:string,
-    timeout:number,
+    timeout?:number,
     nodeAppReboot?:boolean,
     log:string
   }) {
