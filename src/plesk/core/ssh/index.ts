@@ -17,38 +17,35 @@ export class PleskSSh {
     return this.client.executeCommand(command)
   }
 
-  runScript(user:string,commands:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
-    const login = `su - ${user} -s /bin/bash`
-    const move = `cd ${path}`
-    const install = `((${commands}) &> script.log)`
-    const reboot = `mkdir -p tmp && touch tmp/restart.txt`
-    const command = `${login} -c "${move} && ${install} && ${reboot}"`
-    return this.client.executeCommand(command,timeout)
+  private logName(input: string, fallback = 'logfile'): string {
+    const cleaned = input
+      .replace(/[^a-zA-Z-]/g, '') 
+      .replace(/-{2,}/g, '-')     
+      .replace(/^-+|-+$/g, '')  
+
+    return cleaned.length > 0 ? cleaned : fallback
   }
 
-  yarnBuild(user:string,commands:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
+  execute({
+    user,
+    commands,
+    path = 'httpdocs',
+    timeout = 300 * 1000,
+    nodeAppReboot,
+    log
+  }:{
+    user:string,
+    commands:string,
+    path:string,
+    timeout:number,
+    nodeAppReboot?:boolean,
+    log:string
+  }) {
     const login = `su - ${user} -s /bin/bash`
     const move = `cd ${path}`
-    const install = `((${commands}) &> yarn-install.log)`
-    const reboot = `mkdir -p tmp && touch tmp/restart.txt`
-    const command = `${login} -c "${move} && ${install} && ${reboot}"`
-    return this.client.executeCommand(command,timeout)
-  }
-
-  prismaMigration(user:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
-    const login = `su - ${user} -s /bin/bash`
-    const move = `cd ${path}`
-    const migrate = `((yarn install && yarn db:generate && yarn db:migrate:deploy) &> db-migration.log)`
-    const reboot = `mkdir -p tmp && touch tmp/restart.txt`
-    const command = `${login} -c "${move} && ${migrate} && ${reboot}"`
-    return this.client.executeCommand(command,timeout)
-  }
-
-  prismaSeeding(user:string,path:string = 'httpdocs',timeout:number = 300 * 1000) {
-    const login = `su - ${user} -s /bin/bash`
-    const move = `cd ${path}`
-    const seed = `((yarn db:seed) &> db-seeding.log)`
-    const command = `${login} -c "${move} && ${seed}"`
+    const instructions = `((${commands}) &> ${this.logName(log)}.log)`
+    const restart = `mkdir -p tmp && touch tmp/restart.txt`
+    const command = `${login} -c "${move} && ${instructions}"` + (nodeAppReboot ? ` && ${restart}` : '')
     return this.client.executeCommand(command,timeout)
   }
 

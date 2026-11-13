@@ -25,7 +25,7 @@ export class NodeExt extends ExtesionModule {
     return res.ok
   }
 
-  async changeApplicationPackageManager(domainId:number,pkgManager:'yarn'|'npm') {
+  async changeApplicationPackageManager(domainId:number,pkgManager:'yarn'|'npm'|'pnpm') {
     const res = await this._post('/modules/nodejs/index.php/api/change-package-manager',{
       domainId,
       pkgManager,
