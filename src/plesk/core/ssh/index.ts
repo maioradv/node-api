@@ -45,7 +45,8 @@ export class PleskSSh {
     const move = `cd ${path}`
     const instructions = `((${commands}) &> ${this.logName(log)}.log)`
     const restart = `mkdir -p tmp && touch tmp/restart.txt`
-    const command = `${login} -c "${move} && ${instructions}"` + (nodeAppReboot ? ` && ${restart}` : '')
+    const insertReboot = (nodeAppReboot ? `&& ${restart}` : '')
+    const command = `${login} -c "${move} && ${instructions} ${insertReboot}"`
     return this.client.executeCommand(command,timeout)
   }
 
